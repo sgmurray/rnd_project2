@@ -67,19 +67,6 @@
     </visual>
 
   </link>
-  <!--
-  <link name="lwheel">
-    <visual>
-      <geometry>
-        <cylinder length="0.008" radius="0.046"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="black">
-        <color rgba="0 0 0 1"/>
-      </material>
-    </visual>
-  </link>
-  -->
   
   <link name='left_wheel'>
     <inertial>
@@ -157,6 +144,73 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
   
-    
+  
+  <link name='camera'>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.000001" ixy="0" ixz="0"
+          iyy="0.000001" iyz="0"
+          izz="0.000001"
+      />
+    </inertial>
 
+    <collision name='camera_collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <visual name='camera_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.2 0 0" rpy="0 0 0" />
+    <parent link="chassis"/>
+    <child link="camera" />
+  </joint>
+
+  
+  <link name='hokuyo'>
+    <inertial>
+      <mass value="0.00005"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.000001" ixy="0" ixz="0"
+          iyy="0.000001" iyz="0"
+          izz="0.000001"
+      />
+    </inertial>
+
+    <collision name='hokuyo_collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual name='hokuyo_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+	<mesh filename="package://my_robot/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <joint name="hokuyo_joint" type="fixed">
+    <origin xyz="0.15 0 0.1" rpy="0 0 0" />
+    <parent link="chassis"/>
+    <child link="hokuyo" />
+  </joint>
+
+  
 </robot>
